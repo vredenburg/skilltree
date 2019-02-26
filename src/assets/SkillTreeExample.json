@@ -1,0 +1,62 @@
+{
+  "skillTree": {
+    "title": "Archery",
+    "description": "piew piew",
+    "skillNodes": {
+      "0": {
+        "id": 0,
+        "name": "Marksman",
+        "skillLevels": {
+          "0": "Longbows and crossbows are equipable."
+        },
+        "requiredBy": [1,2]
+      },
+      "1": {
+        "id": 1,
+        "name": "Overdraw",
+        "skillLevels": {
+          "0": "Increases accuracy by 5%.",
+          "1": "Increases accuracy by 10%.",
+          "2": "Increases accuracy by 15%."
+        },
+        "requiredBy": null
+      },
+      "2": {
+        "id": 2,
+        "name": "Sharpshooter",
+        "skillLevels": {
+          "0": "Increases range by 5%.",
+          "1": "Increases range by 10%.",
+          "2": "Increases range by 15%."
+        },
+        "requiredBy": [3,4]
+      },
+      "3": {
+        "id": 3,
+        "name": "Ranger",
+        "skillLevels": {
+          "0": "Able to move faster with a drawn bow."
+        },
+        "requiredBy": [5]
+      },
+      "4": {
+        "id": 4,
+        "name": "Quick Shot",
+        "skillLevels": {
+          "0": "Able to draw bow 25% faster.",
+          "1": "Able to draw bow 25% faster."
+        },
+        "requiredBy": [5]
+      },
+      "5": {
+        "id": 5,
+        "name": "Advanced Archery",
+        "skillLevels": {
+          "0": "Able to dual wield light crossbows. Longbows and heavy crossbows now longer slow the player."
+        },
+        "requiredBy": null
+      }
+    }
+    
+  }
+}

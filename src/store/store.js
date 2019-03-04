@@ -9,12 +9,15 @@ const store = new Vuex.Store({
   },
   getters: {
     getSkillTreeDescription: state => {
-      if(!skillTree) 
+      if(!state.skillTree) 
         return ""
-      else 
-        return skillTree.description;
+
+      return state.skillTree.description;
     },
     getSkillTreeWidth: state => {
+      if(!state.skillTree) 
+        return ""
+
       let nodes = state.skillTree.skillTree.skillNodes
       let maxNodeDependenciesForSingleNode = 0
    
@@ -27,7 +30,11 @@ const store = new Vuex.Store({
         
       return maxNodeDependenciesForSingleNode
     },
+    // unfinished
     getSkillTreeWithPositions: state => {
+      if(!state.skillTree) 
+        return;
+
       let nodes = state.skillTree.skillTree.skillNodes
       console.log(nodes)
       return nodes
@@ -39,6 +46,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    resetSkillTree(context) {
+      context.commit('setSkillTree', null)
+    },
     setSkillTree(context, payload) {
       return new Promise((resolve, reject) => {
         if(!payload.data.files.length) {

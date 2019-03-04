@@ -1,14 +1,11 @@
 <template>
   <div class="upload-form">
+    <button v-if="isSaving || isSuccess" v-on:click="$emit('reset')">Reset</button>
     <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-      <h1>Upload images</h1>
       <div class="dropbox">
-        <input type="file" :disabled="isSaving" @change="filesChange($event.target.files); fileCount = $event.target.files.length" accept=".json" class="input-file">
+        <input type="file" :disabled="isSaving" @change="$emit('filesChange', $event.target.files)" accept=".json" class="input-file">
         <p v-if="isInitial">
-          Drag your file(s) here to begin<br> or click to browse
-        </p>
-        <p v-if="isSaving">
-          Uploading {{ fileCount }} files...
+          Drag your file here to begin<br> or click to browse
         </p>
       </div>
     </form>
@@ -16,19 +13,12 @@
 </template>
 
 <script>
-import store from '@/store/store'
-
 const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 
 export default {
   name: 'FileUploadForm',
   props: {
-    
-  },
-  data() {
-    return {
-      currentStatus: null
-    }
+    currentStatus: Number
   },
   computed: {
     isInitial() {
@@ -43,26 +33,6 @@ export default {
     isFailed() {
       return this.currentStatus === STATUS_FAILED
     },
-
-  },
-  methods: {
-    reset() {
-      this.currentStatus = STATUS_INITIAL
-    },
-    filesChange(files) {
-      this.currentStatus = STATUS_SAVING
-
-      store.dispatch({
-      type: 'setSkillTree',
-      data: { files }
-    })
-    .then(() => {
-      this.currentStatus = STATUS_SUCCESS
-    })
-    }
-  },
-  mounted() {
-    this.reset();
   }
 }
 </script>
